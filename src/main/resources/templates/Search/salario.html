@@ -6,20 +6,28 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <title>Reporte de salario máximo por departamento</title>
+    <title>Reporte de salario promedio por departamento</title>
 </head>
 <body>
 <div class="container">
-    <h1>Reporte de salario máximo por departamento</h1>
-    <a class="btn btn-primary" th:href="@{}">Regresar</a>
+    <h1>Reporte de salario promedio por departamento</h1>
+    <a class="btn btn-primary" th:href="@{Search}">Regresar</a>
     <table class="table">
         <thead>
         <tr>
-            <!-- COMPLETAR -->
+            <th>ID</th>
+            <th>Departamento</th>
+            <th>Promedio</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-            <!-- COMPLETAR -->
+        <tr th:each="departamento: ${lista}">
+            <td th:text="${departamento.getId()}"></td>
+            <td th:text="${departamento.getDepartamento()}"></td>
+            <td th:text="${departamento.getPromedio()}"></td>
+            <td><a type="button" class="btn btn-primary" th:href="@{'/Search/listar?id='+${departamento.getId()}}">Info</a></td>
+        </tr>
         </tbody>
     </table>
 </div>
