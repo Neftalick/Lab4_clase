@@ -13,10 +13,10 @@ public class Departments {
     private String departmentname;
     @ManyToOne
     @JoinColumn(name = "manager_id")
-    private Employees managerid;
+    private com.example.laboratorio4.entity.Employees managerid;
     @ManyToOne
     @JoinColumn(name = "location_id")
-    private Locations locationid;
+    private com.example.laboratorio4.entity.Locations locationid;
 
     public int getId() {
         return id;
@@ -34,7 +34,7 @@ public class Departments {
         this.departmentname = departmentname;
     }
 
-    public Employees getManagerid() {
+    public com.example.laboratorio4.entity.Employees getManagerid() {
         return managerid;
     }
 

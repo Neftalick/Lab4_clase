@@ -38,8 +38,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String nuevoEmployeeForm() {
-        //COMPLETAR
+    public String nuevoEmployeeForm(@ModelAttribute("employees") Employees employees, Model model) {
+        model.addAttribute("listaJefes",employeesRepository.findAll());
+        model.addAttribute("listaDepartments",departmentsRepository.findAll());
         return "employee/Frm";
     }
 
@@ -55,18 +56,18 @@ public class EmployeeController {
             return "employee/Frm";
         }else {
 
-            if (employees.getEmployeeid() == 0) {
+            if (employees.getId()== 0) {
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
-                employees.setHiredate(new Date());
+                //employees.setHireDate(new Date());
                 employeesRepository.save(employees);
                 return "redirect:/employee";
             } else {
 
-                try {
-                    employees.setHiredate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
+                /*try {
+                    employees.setHireDate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 employeesRepository.save(employees);
                 attr.addFlashAttribute("msg", "Empleado actualizado exitosamente");
