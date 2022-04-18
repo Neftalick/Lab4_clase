@@ -1,16 +1,14 @@
-package com.example.lab4_clase.controller;
-
-import com.example.lab4_clase.entity.Employees;
-import com.example.lab4_clase.repository.DepartmentsRepository;
-import com.example.lab4_clase.repository.EmployeesRepository;
-import com.example.lab4_clase.repository.JobsRepository;
+package com.example.laboratorio4.controller;
+import com.example.laboratorio4.entity.Employees;
+import com.example.laboratorio4.repository.DepartmentsRepository;
+import com.example.laboratorio4.repository.EmployeesRepository;
+import com.example.laboratorio4.repository.JobsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -26,7 +24,7 @@ public class EmployeeController {
     EmployeesRepository employeesRepository;
 
     @Autowired
-    JobsRepository   jobsRepository;
+    JobsRepository jobsRepository;
 
     @Autowired
     DepartmentsRepository departmentsRepository;
@@ -40,8 +38,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String nuevoEmployeeForm() {
-        //COMPLETAR
+    public String nuevoEmployeeForm(@ModelAttribute("employees") Employees employees, Model model) {
+        model.addAttribute("listaJefes",employeesRepository.findAll());
+        model.addAttribute("listaDepartments",departmentsRepository.findAll());
         return "employee/Frm";
     }
 
@@ -57,18 +56,18 @@ public class EmployeeController {
             return "employee/Frm";
         }else {
 
-            if (employees.getEmployeeid() == 0) {
+            if (employees.getId()== 0) {
                 attr.addFlashAttribute("msg", "Empleado creado exitosamente");
-                employees.setHiredate(new Date());
+                //employees.setHireDate(new Date());
                 employeesRepository.save(employees);
                 return "redirect:/employee";
             } else {
 
-                try {
-                    employees.setHiredate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
+                /*try {
+                    employees.setHireDate(new SimpleDateFormat("yyyy-MM-dd").parse(fechaContrato));
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 employeesRepository.save(employees);
                 attr.addFlashAttribute("msg", "Empleado actualizado exitosamente");

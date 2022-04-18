@@ -13,17 +13,17 @@ public class History {
     private int id;
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private Employees employeeid;
+    private com.example.laboratorio4.entity.Employees employeeid;
     @Column(name = "start_date")
     private Date hiredate;
     @Column(name = "end_date",nullable = false)
     private Date enddate;
     @ManyToOne
     @JoinColumn(name = "job_id")
-    private Jobs jobid;
+    private com.example.laboratorio4.entity.Jobs jobid;
     @ManyToOne
     @JoinColumn(name = "department_id")
-    private Departments departmentid;
+    private com.example.laboratorio4.entity.Departments departmentid;
 
     public int getJobhistoryid() {
         return id;
@@ -33,11 +33,11 @@ public class History {
         this.id = id;
     }
 
-    public Employees getEmployeeid() {
+    public com.example.laboratorio4.entity.Employees getEmployeeid() {
         return employeeid;
     }
 
-    public void setEmployeeid(Employees employeeid) {
+    public void setEmployeeid(com.example.laboratorio4.entity.Employees employeeid) {
         this.employeeid = employeeid;
     }
 
@@ -65,19 +65,19 @@ public class History {
         this.enddate = enddate;
     }
 
-    public Jobs getJobid() {
+    public com.example.laboratorio4.entity.Jobs getJobid() {
         return jobid;
     }
 
-    public void setJobid(Jobs jobid) {
+    public void setJobid(com.example.laboratorio4.entity.Jobs jobid) {
         this.jobid = jobid;
     }
 
-    public Departments getDepartmentid() {
+    public com.example.laboratorio4.entity.Departments getDepartmentid() {
         return departmentid;
     }
 
-    public void setDepartmentid(Departments departmentid) {
+    public void setDepartmentid(com.example.laboratorio4.entity.Departments departmentid) {
         this.departmentid = departmentid;
     }
 
