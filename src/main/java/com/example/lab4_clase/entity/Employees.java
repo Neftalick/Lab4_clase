@@ -1,5 +1,8 @@
 package com.example.laboratorio4.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 
@@ -7,5 +10,4 @@ import javax.persistence.*;
 @Table(name="employees")
 public class Employees {
 
-    //COMPLETAR
 }
