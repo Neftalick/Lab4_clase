@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Lista de Empleados</h1>
+        <h1 style="margin-top: 5%">Lista de Empleados</h1>
         <a class="btn btn-primary mt-4 mb-4" th:href="@{'/employee/new'}">Nuevo Empleado</a>
         <div class="alert alert-success" th:text="${msg1}" th:if="${msg1 != null}"></div>
         <div class="alert alert-warning" th:text="${msg2}" th:if="${msg2 != null}"></div>

@@ -34,7 +34,7 @@ public class Departments {
         this.departmentname = departmentname;
     }
 
-    public com.example.laboratorio4.entity.Employees getManagerid() {
+    public com.example.lab4_clase.entity.Employees getManagerid() {
         return managerid;
     }
 
