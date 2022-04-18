@@ -37,7 +37,7 @@ public class Employees {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "job_id", nullable = false)
-    private com.example.laboratorio4.entity.Jobs job;
+    private Jobs job;
 
     @Column(name = "salary", precision = 8, scale = 2)
     private BigDecimal salary;
@@ -51,7 +51,7 @@ public class Employees {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
-    private com.example.laboratorio4.entity.Departments department;
+    private Departments department;
 
     @Column(name = "enabled")
     private Integer enabled;
@@ -64,11 +64,11 @@ public class Employees {
         this.enabled = enabled;
     }
 
-    public com.example.laboratorio4.entity.Departments getDepartment() {
+    public Departments getDepartment() {
         return department;
     }
 
-    public void setDepartment(com.example.laboratorio4.entity.Departments department) {
+    public void setDepartment(Departments department) {
         this.department = department;
     }
 
@@ -96,11 +96,11 @@ public class Employees {
         this.salary = salary;
     }
 
-    public com.example.laboratorio4.entity.Jobs getJob() {
+    public Jobs getJob() {
         return job;
     }
 
-    public void setJob(com.example.laboratorio4.entity.Jobs job) {
+    public void setJob(Jobs job) {
         this.job = job;
     }
 
