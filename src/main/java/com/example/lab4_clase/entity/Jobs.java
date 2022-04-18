@@ -1,4 +1,4 @@
-package com.example.laboratorio4.entity;
+package com.example.lab4_clase.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

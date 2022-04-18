@@ -1,4 +1,7 @@
-package com.example.laboratorio4.entity;
+package com.example.lab4_clase.entity;
+
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 

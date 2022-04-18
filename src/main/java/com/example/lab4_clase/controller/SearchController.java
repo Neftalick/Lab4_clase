@@ -1,5 +1,4 @@
-package com.example.laboratorio4.controller;
-
+package com.example.lab4_clase.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class SearchController {
     @PostMapping("/busqueda")
     public String buscar (){
 
-        //COMPLETAR
+        return "redirect /Search/";
     }
 
     @GetMapping(value = "/Filtro2")
