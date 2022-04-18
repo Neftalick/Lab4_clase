@@ -19,7 +19,7 @@ public class Locations {
     private String stateprovince;
     @ManyToOne
     @JoinColumn(name = "country_id")
-    private Countries countryid;
+    private com.example.lab4_clase.entity.Countries countryid;
 
     public int getid() {
         return id;
@@ -61,11 +61,11 @@ public class Locations {
         this.stateprovince = stateprovince;
     }
 
-    public Countries getCountryid() {
+    public com.example.lab4_clase.entity.Countries getCountryid() {
         return countryid;
     }
 
-    public void setCountryid(Countries countryid) {
+    public void setCountryid(com.example.lab4_clase.entity.Countries countryid) {
         this.countryid = countryid;
     }
 }

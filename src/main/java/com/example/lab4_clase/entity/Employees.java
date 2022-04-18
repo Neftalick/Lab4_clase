@@ -2,10 +2,14 @@ package com.example.lab4_clase.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -14,44 +18,51 @@ public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id", nullable = false)
+    @Column(name = "employee_id")
     private Integer id;
 
     @Column(name = "first_name", length = 20)
+    @NotBlank(message = "No puede estar vacío")
+
     private String firstName;
 
+    @NotBlank(message = "No puede estar vacío")
     @Column(name = "last_name", nullable = false, length = 25)
     private String lastName;
 
+    @NotBlank(message = "No puede estar vacío")
     @Column(name = "email", nullable = false, length = 25)
     private String email;
 
-    @Column(name = "password", length = 65)
+    @NotBlank(message = "No puede estar vacío")
+    @Size(min = 8,message = "Debe tener un minimo de 8 caracteres")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "phone_number", length = 20)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "hire_date", nullable = false)
-    private Instant hireDate;
+    private LocalDateTime hireDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)
-    private com.example.laboratorio4.entity.Jobs job;
+    private com.example.lab4_clase.entity.Jobs job = new com.example.lab4_clase.entity.Jobs();
 
-    @Column(name = "salary", precision = 8, scale = 2)
+    @Positive(message = "Tiene que ser mayor que 0")
+    @Column(name = "salary")
     private BigDecimal salary;
 
     @Column(name = "commission_pct", precision = 2, scale = 2)
     private BigDecimal commissionPct;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "manager_id")
     private Employees manager;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "department_id")
-    private com.example.laboratorio4.entity.Departments department;
+    private com.example.lab4_clase.entity.Departments department = new com.example.lab4_clase.entity.Departments();
 
     @Column(name = "enabled")
     private Integer enabled;
@@ -64,11 +75,11 @@ public class Employees {
         this.enabled = enabled;
     }
 
-    public com.example.laboratorio4.entity.Departments getDepartment() {
+    public com.example.lab4_clase.entity.Departments getDepartment() {
         return department;
     }
 
-    public void setDepartment(com.example.laboratorio4.entity.Departments department) {
+    public void setDepartment(com.example.lab4_clase.entity.Departments department) {
         this.department = department;
     }
 
@@ -96,19 +107,19 @@ public class Employees {
         this.salary = salary;
     }
 
-    public com.example.laboratorio4.entity.Jobs getJob() {
+    public com.example.lab4_clase.entity.Jobs getJob() {
         return job;
     }
 
-    public void setJob(com.example.laboratorio4.entity.Jobs job) {
+    public void setJob(com.example.lab4_clase.entity.Jobs job) {
         this.job = job;
     }
 
-    public Instant getHireDate() {
+    public LocalDateTime getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Instant hireDate) {
+    public void setHireDate(LocalDateTime hireDate) {
         this.hireDate = hireDate;
     }
 
@@ -159,4 +170,6 @@ public class Employees {
     public void setId(Integer id) {
         this.id = id;
     }
+
+
 }

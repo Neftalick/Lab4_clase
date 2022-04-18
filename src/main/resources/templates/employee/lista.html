@@ -7,15 +7,22 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <title>Lista de Empleados</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
     <div class="container">
         <h1>Lista de Empleados</h1>
         <a class="btn btn-primary mt-4 mb-4" th:href="@{'/employee/new'}">Nuevo Empleado</a>
-        <!-- COMPLETAR -->
+        <div class="alert alert-success" th:text="${msg1}" th:if="${msg1 != null}"></div>
+        <div class="alert alert-warning" th:text="${msg2}" th:if="${msg2 != null}"></div>
+        <div class="alert alert-danger" th:text="${msg3}" th:if="${msg3 != null}"></div>
+        <form class="input-group mb-3" method="post" th:action="@{/employee/search}">
+            <input type="text" class="form-control" placeholder="Buscar Employee" name="searchText">
+            <a class="btn btn-outline-danger" th:href="@{/employee}"><i class="bi bi-x-circle"></i></a>
+            <button class="btn btn-outline-success" type="submit">
+                <i class="bi bi-search"></i></button>
         </form>
-        <!-- COMPLETAR -->
-             <table class="table">  <!-- COMPLETAR -->
+             <table class="table">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -31,14 +38,14 @@
                 <tbody>
                 <tr th:each="employee, info : ${listaEmployee}">
                     <td th:text="${info.index + 1}"></td>
-                    <td th:text="${employee.firstname}"></td>
-                    <td th:text="${employee.lastname}"></td>
-                    <td th:text="${employee.jobid.jobtitle}"></td>
-                    <td th:text="${employee.departmentid.departmentname}"></td>
-                    <td th:text="${employee.departmentid.locationid.city}"></td>
-                    <td><a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${employee.employeeid}}">Editar</a>
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.job.jobtitle}"></td>
+                    <td th:text="${employee.department.departmentname}"></td>
+                    <td th:text="${employee.department.locationid.city}"></td>
+                    <td><a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${employee.id}}">Editar</a>
                     </td>
-                    <td><a class="btn btn-danger" th:href="@{'/employee/delete' + '?id=' + ${employee.employeeid}}">Borrar</a>
+                    <td><a class="btn btn-danger" th:href="@{'/employee/delete' + '?id=' + ${employee.id}}">Borrar</a>
                     </td>
                 </tr>
                 </tbody>

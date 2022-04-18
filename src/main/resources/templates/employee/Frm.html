@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/ccs/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <title>Sedes</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6 offset-md-3">
+                    <h2 th:text="|${employees.id == null ? 'Nuevo' : 'Editar'} Employee|">Editar/Nuevo Employee</h2>
+                    <hr/>
+                    <form method="post" th:action="@{'/employee/save'}" th:object="${employees}">
+                        <input th:field="*{id}" type="hidden"/>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input th:field="*{firstName}" class="form-control" type="text"
+                                   th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}"
+                                 th:errors="*{firstName}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Apellido</label>
+                            <input th:field="*{lastName}" class="form-control" type="text"
+                                   th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}"
+                                 th:errors="*{lastName}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Correo Electrónico</label>
+                            <input th:field="*{email}" class="form-control" type="text"
+                                   th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input  class="form-control" type="password" th:if="${employees.id == null}"  th:value="${employees.password}" name="password" id="password"
+                                   th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"/>
+                            <input  class="form-control" type="password" th:if="${employees.id != null}" th:value="${employees.password}" name="password" id="password1"
+                                    th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}"
+                                 th:errors="*{password}"></div>
+                        </div>
+                        <div class="mb-3" style="">
+                            <label class="form-label">Cargo</label>
+                            <select class="form-select" name="job" style="isplay: block;width: 100%;height: calc(1.5em + 0.75rem + 2px);padding: 0.375rem 0.75rem;font-size: 1rem;font-weight: 400;line-height: 1.5;color: #495057;background-color: #fff;background-clip: padding-box;border: 1px solid #ced4da;border-radius: 0.25rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
+                                <option th:each="job : ${listaJobs}" th:value="${job.jobid}"
+                                        th:text="${job.jobtitle}"
+                                        th:selected="${job.jobid == employees.job.jobid}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sueldo</label>
+                            <input  class="form-control" type="text" th:if="${employees.id == null}"  name="salary" id="salary" th:value="${employees.salary == null ? '0': employees.salary}"
+                                    th:classappend="${#fields.hasErrors('salary')?'is-invalid':''}"/>
+                            <input  class="form-control" type="text" th:if="${employees.id != null}" th:value="${employees.salary}" name="salary" id="salary1"
+                                    th:classappend="${#fields.hasErrors('salary')?'is-invalid':''}"/>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('salary')}"
+                                 th:errors="*{salary}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jefe</label>
+                            <select class="form-select" th:field="*{manager}" style="isplay: block;width: 100%;height: calc(1.5em + 0.75rem + 2px);padding: 0.375rem 0.75rem;font-size: 1rem;font-weight: 400;line-height: 1.5;color: #495057;background-color: #fff;background-clip: padding-box;border: 1px solid #ced4da;border-radius: 0.25rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
+                                <option th:each="jefe : ${listaJefes}" th:value="${jefe.id}"
+                                        th:text="${jefe.firstName} + ' ' + ${jefe.lastName}"
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Departamento</label>
+                            <select class="form-select" name="department" style="isplay: block;width: 100%;height: calc(1.5em + 0.75rem + 2px);padding: 0.375rem 0.75rem;font-size: 1rem;font-weight: 400;line-height: 1.5;color: #495057;background-color: #fff;background-clip: padding-box;border: 1px solid #ced4da;border-radius: 0.25rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
+                                <option th:each="department : ${listaDepartments}" th:value="${department.id}"
+                                        th:text="${department.departmentname}"
+                                        th:selected="${department.id == employees.department.id}"></option>
+                            </select>
+                        </div>
+                        <a th:href="@{'/employee'}" class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-primary"
+                                th:text="${employees.id == null ? 'Guardar' : 'Actualizar'}">Actualizar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script th:fragment="footer-bootstrap" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>
