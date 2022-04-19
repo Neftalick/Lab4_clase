@@ -111,8 +111,6 @@ public class EmployeeController {
     public String buscar (@RequestParam("searchText") String searchField,Model model){
         model.addAttribute("listaEmployee",employeesRepository.buscarEmployee(searchField));
         return "employee/lista";
-
-        //COMPLETAR
     }
 
 }
