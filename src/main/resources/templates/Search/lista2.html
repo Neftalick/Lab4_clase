@@ -11,11 +11,31 @@
 <body>
 <div class="container">
     <h1>Empleados con Mayor Salario en la Empresa</h1>
-    <!-- COMPLETAR -->
+    <div>
+        <form method="post" th:action="@{'/Search/busqueda'}">
+            <input placeholder="Salario a buscar" name="valorBuscado">
+            <button type="submit" class="btn btn-outline-primary">Buscar</button>
+            <a th:href="@{'/Search/Salario'}" type="button" class="btn btn-outline-secondary">Limpiar</a>
+            <a class="btn btn-primary" th:href="@{'/Search'}" role="button">Regresar</a>
+        </form>
+    </div>
+    <div class="alert alert-danger" th:text="${msg}" th:if="${msg != null}"></div>
     <table class="table">
         <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de inicio</th>
+                <th>Puesto</th>
+            </tr>
+        </thead>
         <tbody>
-        <!-- COMPLETAR -->
+            <tr th:each="employee : ${lista}">
+                <td th:text="${employee.getFirstName()}"></td>
+                <td th:text="${employee.getLastName()}"></td>
+                <td th:text="${employee.getHireDate()}"></td>
+                <td th:text="${employee.getJobTitle()}"></td>
+            </tr>
         </tbody>
     </table>
 </div>
