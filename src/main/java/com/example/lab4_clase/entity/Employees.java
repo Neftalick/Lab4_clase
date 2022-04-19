@@ -30,6 +30,7 @@ public class Employees {
     @Column(name = "last_name", nullable = false, length = 25)
     private String lastName;
 
+    @Email(message = "Ingresar un dominio de correo correcto")
     @NotBlank(message = "No puede estar vacío")
     @Column(name = "email", nullable = false, length = 25)
     private String email;
